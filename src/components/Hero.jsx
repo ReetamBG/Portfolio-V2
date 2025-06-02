@@ -6,7 +6,9 @@ import { useGSAP } from "@gsap/react";
 
 const Hero = () => {
 
-  const [currentIndex, setCurrentIndex] = useState(1)
+  const [bgVidIndex, setbgVidIndex] = useState(1)
+  const [expanderVidIndex, setExpanderVidIndex] = useState(2)
+  const [miniVidIndex, setMiniVidIndex] = useState(2)
   const [hasClicked, setHasClicked] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [loadedVideos, setLoadedVideos] = useState(0)
@@ -16,11 +18,12 @@ const Hero = () => {
 
   const handleMiniVideoPlayerClick = () => {
     setHasClicked(true)
-    setCurrentIndex(prev => (prev % totalVideos) + 1)
+    setExpanderVidIndex(miniVidIndex)
+    setMiniVidIndex(prev => (prev % totalVideos) + 1)
   }
 
   const handleVideoLoad = () => {
-    setLoadedVideos(prev => prev + 1)
+    // setLoadedVideos(prev => prev + 1)
   }
 
   const getVideoSrc = (index) => {
@@ -28,25 +31,28 @@ const Hero = () => {
     return videoSrc
   }
 
-  useGSAP(()=>{
-    if(hasClicked) {
-      gsap.set("#next-video", {visibility: "visible"})
+  useGSAP(() => {
+    if (hasClicked) {
+      gsap.set("#next-video", { visibility: "visible" })
       gsap.to("#next-video", {
-        // transformOrigin: "center center",
+        transformOrigin: "center center",
         width: "100%",
         height: "100%",
         duration: 1,
         ease: "power1.inOut",
-        onStart: ()=> nextVideoRef.current.play()
+        onStart: () => nextVideoRef.current.play(),
+        onComplete: () => {
+          setbgVidIndex(expanderVidIndex)
+        }
       })
       gsap.from("#current-video", {
-        // transformOrigin: "center center",
+        transformOrigin: "center center",
         scale: 0,
         duration: 1.5,
         ease: "power1.inOut"
       })
     }
-  }, {dependencies: [currentIndex], revertOnUpdate: true})
+  }, { dependencies: [miniVidIndex], revertOnUpdate: true })
 
   return (
     <div className="relative h-dvh w-screen">
@@ -59,7 +65,7 @@ const Hero = () => {
               <video
                 id="current-video"
                 onClick={handleMiniVideoPlayerClick}                    // updates index to next
-                src={getVideoSrc((currentIndex % totalVideos) + 1)}     // shows the next video to be played 
+                src={getVideoSrc(miniVidIndex)}     // shows the next video to be played 
                 loop
                 muted
                 autoPlay
@@ -72,15 +78,15 @@ const Hero = () => {
             // this video player will zoom in slowly from the mini video player 
             id="next-video"
             ref={nextVideoRef}
-            src={getVideoSrc(currentIndex)}
+            src={getVideoSrc(expanderVidIndex)}
             loop
             muted
-            className="absolute-center size-64 object-cover object-center invisible z-20"
+            className="absolute-center rounded-lg size-64 object-cover object-center invisible z-20"
             onLoadedData={handleVideoLoad}
           />
           <video
             // the actual main video playing in the background - will expand from the above vid player
-            src={getVideoSrc(currentIndex)}
+            src={getVideoSrc(bgVidIndex)}
             autoPlay
             loop
             muted
@@ -92,8 +98,8 @@ const Hero = () => {
           <h1 className="hero-heading special-font text-my-blue-75">
             Rededfi<b>n</b>e
           </h1>
-          <p className="font-robert-regular text-blue-100 mt-2 mb-5 text-md sm:text-xl md:text-2xl">
-            Enter the Metagame Layer<br />Unleash the Play Economy
+          <p className="font-robert-medium text-blue-100 mt-2 mb-5 text-md sm:text-xl">
+            Enter the Metagame<br />Unleash the Play Economy
           </p>
           <Button id="" title="Watch Trailer" leftIcon={<TbLocationFilled />} containerClass="!bg-my-yellow-300" />
         </div>
