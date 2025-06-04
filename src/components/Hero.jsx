@@ -120,7 +120,7 @@ const Hero = () => {
   const getVideoSrc = (index) => `videos/hero-${index}-compressed.mp4`
 
   return (
-    <div className="relative h-dvh w-screen">
+    <div className="relative h-dvh w-screen overflow-x-hidden">
 
       {/* Preload all videos in hidden elements */}
       <div style={{ display: 'none' }}>
