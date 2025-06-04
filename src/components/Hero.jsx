@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import Button from './ui/Button'
 import { TbLocationFilled } from "react-icons/tb";
 import { gsap } from "gsap";
@@ -7,33 +7,47 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger)
 
+const totalVideos = 4;
+
 const Hero = () => {
 
   const [bgVidIndex, setbgVidIndex] = useState(1)
   const [expanderVidIndex, setExpanderVidIndex] = useState(2)
   const [miniVidIndex, setMiniVidIndex] = useState(2)
   const [hasClicked, setHasClicked] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
-  const [loadedVideos, setLoadedVideos] = useState(0)
+  const [loadedVideosCount, setLoadedVideosCount] = useState(0)
+  const [allVideosLoaded, setAllVideosLoaded] = useState(false)
 
-  const totalVideos = 4
   const nextVideoRef = useRef(null)
+  const miniVidPlayerRef = useRef(null)
+  const breathingAnim = useRef(null)
 
+  // Preload video refs - one for each video
+  const preloadVideoRefs = useRef([])
+
+  // Preload all videos on mount
+  useEffect(() => {
+    // When all videos have loaded, mark as loaded
+    if (loadedVideosCount >= totalVideos) {
+      setAllVideosLoaded(true)
+    }
+  }, [loadedVideosCount])
+
+  // Handlers for loading preloaded videos
+  const handlePreloadVideoLoad = () => {
+    setLoadedVideosCount(count => count + 1)
+  }
+
+  // Handle mini video click
   const handleMiniVideoPlayerClick = () => {
+    if (!allVideosLoaded) return // Ignore clicks before preload done
+
     setHasClicked(true)
     setExpanderVidIndex(miniVidIndex)
     setMiniVidIndex(prev => (prev % totalVideos) + 1)
   }
 
-  const handleVideoLoad = () => {
-    setLoadedVideos(prev => prev + 1)
-  }
-
-  const getVideoSrc = (index) => {
-    const videoSrc = `videos/hero-${index}.mp4`
-    return videoSrc
-  }
-
+  // GSAP animation for zooming videos on click
   useGSAP(() => {
     if (hasClicked) {
       gsap.set("#next-video", { visibility: "visible" })
@@ -58,6 +72,7 @@ const Hero = () => {
     }
   }, { dependencies: [miniVidIndex], revertOnUpdate: true })
 
+  // GSAP scroll clip-path animation
   useGSAP(() => {
     gsap.set("#video-frame", {
       clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
@@ -80,10 +95,7 @@ const Hero = () => {
     })
   });
 
-  // breathing animation (CHATGPT)
-  const miniVidPlayerRef = useRef(null);
-  const breathingAnim = useRef(null);
-
+  // Breathing animation for mini video
   useGSAP(() => {
     breathingAnim.current = gsap.fromTo(miniVidPlayerRef.current,
       { scale: 1 },
@@ -95,7 +107,8 @@ const Hero = () => {
         ease: "power1.inOut",
       }
     )
-  })
+  }, [])
+
   const handleMouseEnter = () => {
     breathingAnim.current.pause();
   }
@@ -103,36 +116,31 @@ const Hero = () => {
     breathingAnim.current.resume();
   }
 
-  // vid player follow cursor (CHATGPT)
-  // useGSAP(() => {
-  //   const handleGlobalMouseMove = (e) => {
-  //     const centerX = window.innerWidth / 2;
-  //     const centerY = window.innerHeight / 2;
-  //     const deltaX = (e.clientX - centerX) / centerX;
-  //     const deltaY = (e.clientY - centerY) / centerY;
-  //     const maxTilt = 50;
-
-  //     if (miniVidPlayerRef.current) {
-  //       gsap.to(miniVidPlayerRef.current, {
-  //         rotateY: deltaX * maxTilt,
-  //         rotateX: -deltaY * maxTilt,
-  //         duration: 0.3,
-  //         ease: "power2.out"
-  //       });
-  //     }
-  //   };
-
-  //   window.addEventListener("mousemove", handleGlobalMouseMove);
-  //   return () => window.removeEventListener("mousemove", handleGlobalMouseMove);
-  // }, []);
+  // Helper to get video src by index
+  const getVideoSrc = (index) => `videos/hero-${index}.mp4`
 
   return (
     <div className="relative h-dvh w-screen">
+
+      {/* Preload all videos in hidden elements */}
+      <div style={{ display: 'none' }}>
+        {[...Array(totalVideos)].map((_, idx) => (
+          <video
+            key={`preload-${idx + 1}`}
+            ref={el => preloadVideoRefs.current[idx] = el}
+            src={getVideoSrc(idx + 1)}
+            preload="auto"
+            muted
+            playsInline
+            onCanPlayThrough={handlePreloadVideoLoad}
+          />
+        ))}
+      </div>
+
       <div id="video-frame" className="relative h-dvh w-screen rounded-lg overflow-hidden">
         <div>
-          {/* mini video player that we click on*/}
-          {/* <div id="mini-video-player"  className="z-50 mask-clip-path absolute-center cursor-pointer rounded-lg overflow-hidden"> */}
-          {/*<div className="scale-50 opacity-0 hover:opacity-100 hover:scale-100 transition-all duration-500"> */}
+
+          {/* Mini video player to click */}
           <div
             id="mini-video-player"
             ref={miniVidPlayerRef}
@@ -141,39 +149,40 @@ const Hero = () => {
             className="z-50 mask-clip-path absolute-center cursor-pointer rounded-lg"
           >
             <div id="player" className="scale-50 hover:scale-100 transition-all duration-500 overflow-hidden rounded-lg">
-              {/* slowly appears on hover */}
+
+              {/* Show mini video from preloaded video element's src */}
               <video
                 id="current-video"
-                onClick={handleMiniVideoPlayerClick}                    // updates index to next
-                src={getVideoSrc(miniVidIndex)}     // shows the next video to be played 
+                onClick={handleMiniVideoPlayerClick}
+                src={getVideoSrc(miniVidIndex)}
                 loop
                 muted
                 autoPlay
                 className="size-40 sm:size-64 scale-150 object-cover object-center"
-                onLoadedData={handleVideoLoad}
               />
             </div>
           </div>
+
+          {/* Next video zooms in on click */}
           <video
-            // this video player will zoom in slowly from the mini video player 
             id="next-video"
             ref={nextVideoRef}
             src={getVideoSrc(expanderVidIndex)}
             loop
             muted
             className="absolute-center rounded-lg size-40 sm:size-64 object-cover object-center invisible z-20"
-            onLoadedData={handleVideoLoad}
           />
+
+          {/* Main background video */}
           <video
-            // the actual main video playing in the background - will expand from the above vid player
             src={getVideoSrc(bgVidIndex)}
             autoPlay
             loop
             muted
             className="absolute object-cover size-full"
-            onLoadedData={handleVideoLoad}
           />
         </div>
+
         <div className="absolute z-50 top-5 left-5">
           <h1 className="hero-heading special-font text-my-blue-75">
             Rededfi<b>n</b>e
@@ -183,14 +192,23 @@ const Hero = () => {
           </p>
           <Button id="" title="Watch Trailer" leftIcon={<TbLocationFilled />} containerClass="!bg-my-yellow-300" />
         </div>
+
         <h1 className="absolute z-50 hero-heading special-font right-5 bottom-5 text-my-blue-75">
           G<b>a</b>ming
         </h1>
       </div>
+
       <h1 className="absolute hero-heading z-[-10] special-font right-5 bottom-5 text-black">
         G<b>a</b>ming
       </h1>
-    </div >
+
+      {!allVideosLoaded && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50 text-white text-xl">
+          Loading videos...
+        </div>
+      )}
+
+    </div>
   )
 }
 
