@@ -149,8 +149,6 @@ const Hero = () => {
             className="z-50 mask-clip-path absolute-center cursor-pointer rounded-lg"
           >
             <div id="player" className="scale-50 hover:scale-100 transition-all duration-500 overflow-hidden rounded-lg">
-
-              {/* Show mini video from preloaded video element's src */}
               <video
                 id="current-video"
                 onClick={handleMiniVideoPlayerClick}
