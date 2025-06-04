@@ -59,27 +59,20 @@ const Hero = () => {
   }, { dependencies: [miniVidIndex], revertOnUpdate: true })
 
   useGSAP(() => {
-    gsap.set("#video-frame,#player", {
-      clipPath: "polygon(10% 0%, 65% 5%, 90% 90%, 0% 100%)",
-      borderRadius: "0% 0% 45% 10%"
-    });
-    gsap.from("#video-frame", {
+    gsap.set("#video-frame", {
       clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
       borderRadius: "0% 0% 0% 0%",
+    });
+    gsap.set("#player", {
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      borderRadius: "5%",
+    });
+    gsap.to("#video-frame, #player", {
+      clipPath: "polygon(10% 0%, 65% 5%, 90% 90%, 0% 100%)",
+      borderRadius: "25% 60% 45% 10%",
       ease: "power1.inOut",
       scrollTrigger: {
         trigger: "#video-frame",
-        start: "center center",
-        end: "bottom center",
-        scrub: true,
-      }
-    })
-    gsap.from("#player", {
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-      borderRadius: "5%",
-      ease: "power1.inOut",
-      scrollTrigger: {
-        trigger: "#player",
         start: "center center",
         end: "bottom center",
         scrub: true,
