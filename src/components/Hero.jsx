@@ -90,7 +90,7 @@ const Hero = () => {
         trigger: "#video-frame",
         start: "center center",
         end: "bottom center",
-        scrub: true,
+        scrub: 0.5,
       }
     })
   });
@@ -205,7 +205,6 @@ const Hero = () => {
           Loading videos...
         </div>
       )}
-
     </div>
   )
 }
