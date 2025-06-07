@@ -201,7 +201,7 @@ const Hero = () => {
       </h1>
 
       {!allVideosLoaded && (
-        <div className="flex flex-col fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50 text-white">
+        <div className="flex flex-col fixed inset-0 items-center justify-center bg-black bg-opacity-70 z-50 text-white">
           <div className="three-body">
             <div className="three-body__dot"></div>
             <div className="three-body__dot"></div>
