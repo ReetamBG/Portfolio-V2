@@ -201,8 +201,15 @@ const Hero = () => {
       </h1>
 
       {!allVideosLoaded && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50 text-white text-xl">
-          Loading videos...
+        <div className="flex flex-col fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50 text-white">
+          <div className="three-body">
+            <div className="three-body__dot"></div>
+            <div className="three-body__dot"></div>
+            <div className="three-body__dot"></div>
+          </div>
+          <div className="font-zentry-regular text-xl text-center mt-10">
+            Cooking...<br /> Please wait...
+          </div>
         </div>
       )}
     </div>
