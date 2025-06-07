@@ -15,28 +15,39 @@ const Hero = () => {
   const [expanderVidIndex, setExpanderVidIndex] = useState(2)
   const [miniVidIndex, setMiniVidIndex] = useState(2)
   const [hasClicked, setHasClicked] = useState(false)
-  const [loadedVideosCount, setLoadedVideosCount] = useState(0)
   const [allVideosLoaded, setAllVideosLoaded] = useState(false)
 
   const nextVideoRef = useRef(null)
   const miniVidPlayerRef = useRef(null)
   const breathingAnim = useRef(null)
 
-  // Preload video refs - one for each video
-  const preloadVideoRefs = useRef([])
+  // 🆕 Added: To store preloaded blob URLs
+  const [preloadedSources, setPreloadedSources] = useState([])
 
-  // Preload all videos on mount
-  useEffect(() => {
-    // When all videos have loaded, mark as loaded
-    if (loadedVideosCount >= totalVideos) {
-      setAllVideosLoaded(true)
-    }
-  }, [loadedVideosCount])
-
-  // Handlers for loading preloaded videos
-  const handlePreloadVideoLoad = () => {
-    setLoadedVideosCount(count => count + 1)
+  // 🆕 Added: Force preload videos using fetch and blob
+  const preloadVideos = async () => {
+    const loadedBlobs = await Promise.all(
+      [...Array(totalVideos)].map(async (_, idx) => {
+        const response = await fetch(getVideoSrc(idx + 1))
+        const blob = await response.blob()
+        return URL.createObjectURL(blob)
+      })
+    )
+    setPreloadedSources(loadedBlobs)
+    setAllVideosLoaded(true)
   }
+
+  // 🆕 Added: Start preloading on mount
+  useEffect(() => {
+    preloadVideos()
+  }, [])
+
+  // 🆕 Added: Cleanup blobs on unmount
+  useEffect(() => {
+    return () => {
+      preloadedSources.forEach(url => URL.revokeObjectURL(url))
+    }
+  }, [preloadedSources])
 
   // Handle mini video click
   const handleMiniVideoPlayerClick = () => {
@@ -121,20 +132,7 @@ const Hero = () => {
   return (
     <div className="relative h-dvh w-screen">
 
-      {/* Preload all videos in hidden elements */}
-      <div style={{ display: 'none' }}>
-        {[...Array(totalVideos)].map((_, idx) => (
-          <video
-            key={`preload-${idx + 1}`}
-            ref={el => preloadVideoRefs.current[idx] = el}
-            src={getVideoSrc(idx + 1)}
-            preload="auto"
-            muted
-            playsInline
-            onCanPlayThrough={handlePreloadVideoLoad}
-          />
-        ))}
-      </div>
+      {/* 🆕 Removed the hidden preload <video> elements (no longer needed) */}
 
       <div id="video-frame" className="relative h-dvh w-screen rounded-lg overflow-hidden">
         <div>
@@ -151,10 +149,9 @@ const Hero = () => {
               <video
                 id="current-video"
                 onClick={handleMiniVideoPlayerClick}
-                src={getVideoSrc(miniVidIndex)}
+                src={preloadedSources[miniVidIndex - 1] || ""}
                 loop
                 muted
-                // autoPlay
                 className="size-40 sm:size-64 scale-150 object-cover object-center"
               />
             </div>
@@ -164,7 +161,7 @@ const Hero = () => {
           <video
             id="next-video"
             ref={nextVideoRef}
-            src={getVideoSrc(expanderVidIndex)}
+            src={preloadedSources[expanderVidIndex - 1] || ""}
             loop
             muted
             className="absolute-center rounded-lg size-40 sm:size-64 object-cover object-center invisible z-20"
@@ -172,7 +169,7 @@ const Hero = () => {
 
           {/* Main background video */}
           <video
-            src={getVideoSrc(bgVidIndex)}
+            src={preloadedSources[bgVidIndex - 1] || ""}
             autoPlay
             loop
             muted
