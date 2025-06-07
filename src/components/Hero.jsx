@@ -50,16 +50,18 @@ const Hero = () => {
   // GSAP animation for zooming videos on click
   useGSAP(() => {
     if (hasClicked) {
-      gsap.set("#next-video", { visibility: "visible" })
+      gsap.set("#next-video", { visibility: "visible"})
+      gsap.set("#player", {border: "none"})
       gsap.to("#next-video", {
         transformOrigin: "center center",
         width: "100%",
         height: "100%",
         duration: 1,
-        ease: "power1.inOut",
+        ease: "power1.out",
         onStart: () => nextVideoRef.current.play(),
         onComplete: () => {
           setHasClicked(false)
+          gsap.to("#player", {border: "solid 2px white"})
           setbgVidIndex(expanderVidIndex)
         }
       })
@@ -67,7 +69,7 @@ const Hero = () => {
         transformOrigin: "center center",
         scale: 0,
         duration: 1.5,
-        ease: "power1.inOut"
+        ease: "power1.out"
       })
     }
   }, { dependencies: [miniVidIndex], revertOnUpdate: true })
@@ -78,11 +80,8 @@ const Hero = () => {
       clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
       borderRadius: "0% 0% 0% 0%",
     });
-    gsap.set("#player", {
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-      borderRadius: "5%",
-    });
-    gsap.to("#video-frame, #player", {
+
+    gsap.to("#video-frame", {
       clipPath: "polygon(10% 0%, 65% 5%, 90% 90%, 0% 100%)",
       borderRadius: "25% 60% 45% 10%",
       ease: "power1.inOut",
@@ -97,11 +96,11 @@ const Hero = () => {
 
   // Breathing animation for mini video
   useGSAP(() => {
-    breathingAnim.current = gsap.fromTo(miniVidPlayerRef.current,
+    breathingAnim.current = gsap.fromTo(["#current-video"],
       { scale: 1 },
       {
         scale: 1.5,
-        duration: 1,
+        duration: 1.5,
         yoyo: true,
         repeat: -1,
         ease: "power1.inOut",
@@ -148,14 +147,14 @@ const Hero = () => {
             onMouseLeave={handleMouseLeave}
             className="z-50 mask-clip-path absolute-center cursor-pointer rounded-lg"
           >
-            <div id="player" className="scale-50 hover:scale-100 transition-all duration-500 overflow-hidden rounded-lg">
+            <div id="player" className="scale-50 border-white border-4 hover:border-2 hover:scale-100 transition-all duration-500 overflow-hidden rounded-lg">
               <video
                 id="current-video"
                 onClick={handleMiniVideoPlayerClick}
                 src={getVideoSrc(miniVidIndex)}
                 loop
                 muted
-                autoPlay
+                // autoPlay
                 className="size-40 sm:size-64 scale-150 object-cover object-center"
               />
             </div>
@@ -181,7 +180,7 @@ const Hero = () => {
           />
         </div>
 
-        <div className="absolute z-50 top-5 left-5">
+        <div className="absolute mt-24 z-50 top-5 left-5">
           <h1 className="hero-heading special-font text-my-blue-75">
             Rededfi<b>n</b>e
           </h1>

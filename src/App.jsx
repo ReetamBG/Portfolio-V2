@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar"
 const App = () => {
   return (
     <main className="relative min-h-screen w-screen">
-      <Navbar />
+      {/* <Navbar /> */}
       <Hero />
       <About />
     </main>
