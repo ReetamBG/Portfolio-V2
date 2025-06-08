@@ -127,7 +127,7 @@ const Hero = () => {
   }
 
   // Helper to get video src by index
-  const getVideoSrc = (index) => `videos/hero-${index}-compressed.mp4`
+  const getVideoSrc = (index) => `videos/hero-${index}.mp4`
 
   return (
     <div className="relative h-dvh w-screen">
@@ -177,22 +177,22 @@ const Hero = () => {
           />
         </div>
 
-        <div className="absolute mt-24 z-50 top-5 left-5">
-          <h1 className="hero-heading special-font text-my-blue-75">
-            Rededfi<b>n</b>e
+        <div className="absolute z-50 top-25 left-10">
+          <h1 className="tracking-[2px] hero-heading special-font text-my-blue-75">
+            Redefi<b>n</b>e
           </h1>
-          <p className="font-robert-medium text-blue-100 mt-2 mb-5 text-md sm:text-xl">
+          <p className="font-robert-medium text-blue-100 mt-2 mb-5 text-md sm:text-lg">
             Enter the Metagame<br />Unleash the Play Economy
           </p>
           <Button id="" title="Watch Trailer" leftIcon={<TbLocationFilled />} containerClass="!bg-my-yellow-300" />
         </div>
 
-        <h1 className="absolute z-50 hero-heading special-font right-5 bottom-5 text-my-blue-75">
+        <h1 className="tracking-[2px] absolute z-50 hero-heading special-font right-10 bottom-5 text-my-blue-75">
           G<b>a</b>ming
         </h1>
       </div>
 
-      <h1 className="absolute hero-heading z-[-10] special-font right-5 bottom-5 text-black">
+      <h1 className="tracking-[2px] absolute hero-heading z-[-10] special-font right-7 bottom-2 text-black">
         G<b>a</b>ming
       </h1>
 

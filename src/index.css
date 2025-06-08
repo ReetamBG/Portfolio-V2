@@ -74,10 +74,8 @@
   }
 
   .hero-heading {
-    @apply uppercase font-zentry-regular font-black text-5xl sm:text-7xl md:text-9xl lg:text-[10rem];
+    @apply uppercase font-zentry-regular font-black text-5xl sm:text-7xl md:text-9xl lg:text-[12rem];
   }
-
-
 
   /* From Uiverse.io by G4b413l */
   /* https://uiverse.io/G4b413l/tidy-walrus-92 */
@@ -181,6 +179,30 @@
     50% {
       transform: translateY(66%) scale(0.65);
       opacity: 0.8;
+    }
+  }
+
+  .indicator-line {
+    @apply h-1 w-px rounded-full bg-white transition-all duration-200 ease-in-out;
+  }
+
+  .indicator-line.active {
+    animation: indicator-line 0.5s ease infinite;
+    animation-delay: calc(var(--animation-order) * 0.1s);
+  }
+
+  @keyframes indicator-line {
+    0% {
+      height: 4px;
+      transform: translateY(-0px);
+    }
+    50% {
+      height: 16px;
+      transform: translateY(-4px);
+    }
+    100% {
+      height: 4px;
+      transform: translateY(-0px);
     }
   }
 }
