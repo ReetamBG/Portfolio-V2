@@ -20,6 +20,7 @@ const Hero = () => {
   const nextVideoRef = useRef(null)
   const miniVidPlayerRef = useRef(null)
   const breathingAnim = useRef(null)
+  const pageFlipAudioRef = useRef()
 
   // 🆕 Added: To store preloaded blob URLs
   const [preloadedSources, setPreloadedSources] = useState([])
@@ -40,6 +41,9 @@ const Hero = () => {
   // 🆕 Added: Start preloading on mount
   useEffect(() => {
     preloadVideos()
+
+    // just reducing the volume of page flip a bit
+    pageFlipAudioRef.current.volume=0.3
   }, [])
 
   // 🆕 Added: Cleanup blobs on unmount
@@ -53,6 +57,8 @@ const Hero = () => {
   const handleMiniVideoPlayerClick = () => {
     if (!allVideosLoaded) return // Ignore clicks before preload done
 
+    
+    pageFlipAudioRef.current.play()
     setHasClicked(true)
     setExpanderVidIndex(miniVidIndex)
     setMiniVidIndex(prev => (prev % totalVideos) + 1)
@@ -131,6 +137,8 @@ const Hero = () => {
 
   return (
     <div className="relative h-dvh w-screen">
+      {/* page flip audio - plays when we click the mini vid player */}
+      <audio ref={pageFlipAudioRef} src="/audio/page-flip.mp3" hidden />
 
       {/* 🆕 Removed the hidden preload <video> elements (no longer needed) */}
 
