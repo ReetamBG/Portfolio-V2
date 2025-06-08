@@ -55,7 +55,7 @@ const Navbar = () => {
         <div className="flex items-center gap-15">
           <nav className="hidden sm:flex text-white uppercase text-xs gap-15 font-general font-bold">
             {navItems.map((navItem, idx) => (
-              <a key={idx} href={navItem.href}>{navItem.text}</a>
+              <a className=" nav-hover-btn" key={idx} href={navItem.href}>{navItem.text}</a>
             ))}
           </nav>
           <button
@@ -68,7 +68,7 @@ const Navbar = () => {
                 key={bar}
                 className={`indicator-line ${isAudioPlaying && "active"}`}
                 style={{
-                  animationDelay: `${bar * 0.1}s`,
+                  animationDelay: `${bar * 0.2}s`,
                 }}
               />
             ))}
