@@ -41,9 +41,8 @@ const Hero = () => {
   // 🆕 Added: Start preloading on mount
   useEffect(() => {
     preloadVideos()
-
     // just reducing the volume of page flip a bit
-    pageFlipAudioRef.current.volume=0.3
+    pageFlipAudioRef.current.volume = 0.3
   }, [])
 
   // 🆕 Added: Cleanup blobs on unmount
@@ -57,18 +56,51 @@ const Hero = () => {
   const handleMiniVideoPlayerClick = () => {
     if (!allVideosLoaded) return // Ignore clicks before preload done
 
-    
+
     pageFlipAudioRef.current.play()
     setHasClicked(true)
     setExpanderVidIndex(miniVidIndex)
     setMiniVidIndex(prev => (prev % totalVideos) + 1)
   }
 
+  // animation on page load
+  useGSAP(() => {
+    const tl = gsap.timeline()
+    if (allVideosLoaded) {
+      tl.to("#loading-screen", {
+        scale: 0,
+        borderRadius: "100%",
+        duration: 1,
+        ease: "power2.inOut",
+        transformOrigin: "center center",
+      }, 0)
+      tl.from("#heading-left", {
+        opacity: "0",
+        rotateX: "30deg",
+        rotateY: "60deg",
+        transformOrigin: "50% 100% 50px",
+        ease: "power1.inOut",
+      }, "0.3")
+      tl.from("#heading-right", {
+        opacity: "0",
+        rotateX: "30deg",
+        rotateY: "-60deg",
+        transformOrigin: "50% 100% 50px",
+        ease: "power1.out",
+      }, "0.5")
+      tl.from("#subheader", {
+        opacity: "0",
+        translateY: "50px",
+        ease: "power1.inOut",
+      }, "0.5")
+    }
+  }, [allVideosLoaded])
+
   // GSAP animation for zooming videos on click
   useGSAP(() => {
     if (hasClicked) {
-      gsap.set("#next-video", { visibility: "visible"})
-      gsap.set("#player", {border: "none"})
+      gsap.set("#next-video", { visibility: "visible" })
+      gsap.set("#player", { border: "none" })
       gsap.to("#next-video", {
         transformOrigin: "center center",
         width: "100%",
@@ -78,7 +110,7 @@ const Hero = () => {
         onStart: () => nextVideoRef.current.play(),
         onComplete: () => {
           setHasClicked(false)
-          gsap.to("#player", {border: "solid 2px white"})
+          gsap.to("#player", { border: "solid 2px white" })
           setbgVidIndex(expanderVidIndex)
         }
       })
@@ -186,16 +218,18 @@ const Hero = () => {
         </div>
 
         <div className="absolute z-50 top-25 left-10">
-          <h1 className="tracking-[2px] hero-heading special-font text-my-blue-75">
+          <h1 id="heading-left" className="tracking-[2px] hero-heading special-font text-my-blue-75">
             Redefi<b>n</b>e
           </h1>
-          <p className="font-robert-medium text-blue-100 mt-2 mb-5 text-md sm:text-lg">
-            Enter the Metagame<br />Unleash the Play Economy
-          </p>
-          <Button id="" title="Watch Trailer" leftIcon={<TbLocationFilled />} containerClass="!bg-my-yellow-300" />
+          <div id="subheader">
+            <p className="font-robert-medium text-blue-100 mt-2 mb-5 text-md sm:text-lg">
+              Enter the Metagame<br />Unleash the Play Economy
+            </p>
+            <Button id="" title="Watch Trailer" leftIcon={<TbLocationFilled />} containerClass="!bg-my-yellow-300" />
+          </div>
         </div>
 
-        <h1 className="tracking-[2px] absolute z-50 hero-heading special-font right-10 bottom-5 text-my-blue-75">
+        <h1 id="heading-right" className="tracking-[2px] absolute z-50 hero-heading special-font right-10 bottom-5 text-my-blue-75">
           G<b>a</b>ming
         </h1>
       </div>
@@ -204,8 +238,9 @@ const Hero = () => {
         G<b>a</b>ming
       </h1>
 
-      {!allVideosLoaded && (
-        <div className="flex flex-col fixed inset-0 items-center justify-center bg-black bg-opacity-70 z-50 text-white">
+      {/* {!allVideosLoaded && ( */}
+      {true && (
+        <div id="loading-screen" className="flex flex-col fixed inset-0 items-center justify-center bg-black bg-opacity-70 z-50 text-white">
           <div className="three-body">
             <div className="three-body__dot"></div>
             <div className="three-body__dot"></div>
