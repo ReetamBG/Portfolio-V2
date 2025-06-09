@@ -84,6 +84,10 @@
     @apply uppercase font-zentry-regular font-black text-5xl sm:text-7xl md:text-9xl lg:text-[12rem];
   }
 
+  .floating-navbar{
+    @apply bg-black rounded-lg;
+  }
+
   /* From Uiverse.io by G4b413l */
   /* https://uiverse.io/G4b413l/tidy-walrus-92 */
   .three-body {

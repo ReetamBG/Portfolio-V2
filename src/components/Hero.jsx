@@ -106,7 +106,7 @@ const Hero = () => {
         trigger: "#video-frame",
         start: "center center",
         end: "bottom center",
-        scrub: 0.5,
+        scrub: 0.3,
       }
     })
   });
