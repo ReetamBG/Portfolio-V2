@@ -44,7 +44,9 @@ const Navbar = () => {
   // show navbar based on if visible
   useGSAP(()=>{
       gsap.to(navContainerRef.current, {
-        y: isNavbarVisible ? 0 : -100
+        y: isNavbarVisible ? 0 : -100,
+        opacity: isNavbarVisible ? 1 : 0,
+        duration: 0.3
       })
     }, [isNavbarVisible])
 
