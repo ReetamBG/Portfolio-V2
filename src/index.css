@@ -85,7 +85,7 @@
   }
 
   .floating-navbar{
-    @apply bg-black rounded-lg;
+    @apply bg-black rounded-lg border-1 border-my-blue-50/20;
   }
 
   /* From Uiverse.io by G4b413l */
