@@ -9,7 +9,9 @@ import gsap from "gsap"
 const navItems = [
   { text: "Home", href: "#" },
   { text: "About", href: "#about" },
-  { text: "Projects", href: "#projects" },
+  { text: "Features", href: "#features" },
+  { text: "Story", href: "#story" },
+  { text: "Contact", href: "#contact" },
 ]
 
 const Navbar = () => {

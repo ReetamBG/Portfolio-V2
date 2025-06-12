@@ -35,6 +35,7 @@ const Story = () => {
 
   return (
     <div
+      id="story"
       className="relative w-screen h-[70dvh] md:h-[80dvh] lg:h-dvh bg-black isolate"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -54,7 +55,7 @@ const Story = () => {
           style={{ transform: transformStyle }}
           ref={imgContainerRef}
         >
-          <img src="/img/entrance.webp"/>
+          <img src="/img/entrance.webp" />
         </div>
       </div>
     </div>

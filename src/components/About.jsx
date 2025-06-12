@@ -26,7 +26,10 @@ const About = () => {
     <div id="about" className="min-h-screen w-screen overflow-x-hidden">
       <div className="relative mt-36 mb-8 flex flex-col items-center gap-10">
         <p className="font-general text-sm uppercase md:text-xl">Welcome to Zentry</p>
-        <AnimatedHeader text="Discover the worlds <br />largest shared adventure" containerClass="" />
+        <AnimatedHeader
+          text="Disc<b>o</b>ver the world's <br /> largest shared <b>a</b>dventure"
+          containerClass=""
+        />
         <div className="absolute -bottom-[90dvh] font-circular-web text-center max-w-[75%]">
           <p className="text-md md:text-2xl pb-1">The Game of Games begins-your life, now an epic MMORPG</p>
           <p className="text-md md:text-2xl text-gray-500">Zentry unites every player from countless games and platforms</p>

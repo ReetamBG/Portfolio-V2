@@ -3,7 +3,7 @@ import { TiLocationArrow } from "react-icons/ti"
 
 const Features = () => {
   return (
-    <section className="bg-black text-white py-20 px-5 md:px-30 lg:pb-50">
+    <section id="features" className="bg-black text-white py-20 px-5 md:px-30 lg:pb-50">
       <div className="font-circular-web w-full px-5 md:px-10 mb-10">
         <h2>Explore the Zentry Universe</h2>
         <p className="text-white/50 w-[100%] md:w-[40%]">
