@@ -45,9 +45,9 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scrollbar-width: none;      /* Firefox */
-    -ms-overflow-style: none;   /* IE and Edge */
-    overflow-y: scroll;         /* ensures layout stability */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    overflow-y: scroll; /* ensures layout stability */
   }
 
   body {
@@ -84,8 +84,25 @@
     @apply uppercase font-zentry-regular font-black text-5xl sm:text-7xl md:text-9xl lg:text-[12rem];
   }
 
-  .floating-navbar{
+  .floating-navbar {
     @apply bg-black rounded-lg;
+  }
+
+  .story-image-container {
+    @apply relative w-full;
+  }
+
+  .story-image-mask {
+    @apply absolute w-[60%] left-1/2 -translate-x-1/2 transition-all duration-50;
+    clip-path: polygon(4% 0, 83% 21%, 100% 73%, 0% 100%);
+    border-radius: 500px, 30px, 40px, 30px;
+  }
+
+  @media (max-width: 600px) {
+    .story-image-mask {
+      @apply scale-250 absolute w-[60%] left-1/2 -translate-x-1/2 transition-all duration-50;
+      clip-path: polygon(40% 6%, 67% 0, 72% 93%, 24% 100%);
+    }
   }
 
   /* From Uiverse.io by G4b413l */

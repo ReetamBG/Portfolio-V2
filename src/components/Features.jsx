@@ -3,14 +3,14 @@ import { TiLocationArrow } from "react-icons/ti"
 
 const Features = () => {
   return (
-    <section className="bg-black text-white py-20 px-5 md:px-30">
+    <section className="bg-black text-white py-20 px-5 md:px-30 lg:pb-50">
       <div className="font-circular-web w-full px-5 md:px-10 mb-10">
         <h2>Explore the Zentry Universe</h2>
         <p className="text-white/50 w-[100%] md:w-[40%]">
           Immerse yourself in an IP-rich product universe where players, agentic AI and blockchain lead the new economic paradigm.
         </p>
       </div>
-      <BentoTilt className="h-96 md:h-[65vh] w-full mb-7">
+      <BentoTilt className="h-70 md:h-[50vh] lg:h-[70vh] w-full mb-7">
         <BentoCard
           videoSrc="/videos/feature-1.mp4"
           title={<>radia<b>n</b>t</>}
@@ -72,10 +72,10 @@ const BentoCard = ({ videoSrc, title, description }) => {
         muted
         loop
       />
-      <div className="relative p-5 md:p-10 size-full">
-        <h3 className="font-zentry-regular special-font text-4xl md:text-7xl uppercase">{title}</h3>
+      <div className="relative p-5 size-full">
+        <h3 className="font-zentry-regular special-font text-4xl md:text-6xl uppercase">{title}</h3>
         {description && (
-          <p className="text-my-blue-50 max-w-[50%] md:max-w-[40%] text-xs md:text-base">{description}</p>
+          <p className="text-my-blue-50 max-w-[50%] md:max-w-[40%] text-xs md:text-sm">{description}</p>
         )}
       </div>
     </div>
@@ -102,11 +102,11 @@ const BentoTilt = ({ children, className = "" }) => {
     const relativeY = (cursorY - top) / (bottom - top)   // (cursorY - boxRight) / heightOfBox
     
     // relative position of cursor from center -> degree of tilt
-    const tiltStrength = 10
+    const tiltStrength = 8
     const tiltX = -(relativeY - 0.5) * tiltStrength
     const tiltY = (relativeX - 0.5) * tiltStrength
 
-    const newTransform = `perspective(500px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(.95, .95, .95)`
+    const newTransform = `perspective(700px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(.95, .95, .95)`
     setTransformStyle(newTransform)
   }
 
