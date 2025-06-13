@@ -165,7 +165,7 @@ const Hero = () => {
   }
 
   // Helper to get video src by index
-  const getVideoSrc = (index) => `videos/hero-${index}.mp4`
+  const getVideoSrc = (index) => `videos/hero-${index}-compressed.mp4`
 
   return (
     <div className="relative h-dvh w-screen">
