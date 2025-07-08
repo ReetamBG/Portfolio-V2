@@ -19,12 +19,12 @@ const HeroSection = () => {
               Hi, I&apos;m Reetam 👋
             </h1>
             <p className="my-2 text-base sm:text-xl font-medium">
-              Software Developer from India
+              Software Developer from India 🇮🇳
             </p>
             {/* Socials and Resume */}
             <div className="mt-6 flex gap-4 items-center transition-all">
               <a href={resume}>
-                <Button className="h-6 cursor-pointer hover:scale-105 bg-red-600 text-white">
+                <Button variant="destructive" className="h-6 cursor-pointer hover:scale-105 bg-red-600 text-white">
                   Resume
                   <DownloadCloud />
                 </Button>
