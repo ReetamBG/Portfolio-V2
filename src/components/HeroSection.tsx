@@ -24,7 +24,7 @@ const HeroSection = () => {
             {/* Socials and Resume */}
             <div className="mt-6 flex gap-4 items-center transition-all">
               <a href={resume}>
-                <Button variant="destructive" className="h-6 cursor-pointer hover:scale-105 bg-red-600 text-white">
+                <Button className="h-6 cursor-pointer hover:scale-105 bg-red-700 text-white">
                   Resume
                   <DownloadCloud />
                 </Button>
