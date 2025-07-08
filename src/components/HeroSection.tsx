@@ -64,11 +64,12 @@ const HeroSection = () => {
             A 21-year-old Computer Science undergrad with experience in
             fullstack development and machine learning. Currently in my final
             year of CS degree from JEC, Assam. I primarily work with Next.js,
-            React, Node.js, and Express to build web applications end to end.
+            React, Node.js, and Express to build web applications front and
+            back.
             <br />
             I&apos;ve built stuff ranging from AI integrated full-stack
-            applications to real-time systems. I like working across the stack
-            and writing code that&apos;s easy to understand and maintain.
+            applications to real-time systems and have also worked with
+            languages like Golang and Python for building Backend Applications.
           </p>
         </div>
       </div>
