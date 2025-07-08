@@ -18,7 +18,7 @@ const HeroSection = () => {
             <h1 className="text-4xl sm:text-6xl tracking-tight font-bold sm:whitespace-nowrap">
               Hi, I&apos;m Reetam 👋
             </h1>
-            <p className="my-2 text-base sm:text-xl font-medium">
+            <p className="my-2 text-base sm:text-2xl font-medium">
               Fullstack Software Engineer
             </p>
             {/* Socials and Resume */}
@@ -59,8 +59,8 @@ const HeroSection = () => {
         </div>
         {/* About section */}
         <div className="mt-16">
-          <h3 className="font-bold text-xl">About</h3>
-          <p className="text-sm text-primary/80">
+          <h3 className="font-bold text-xl sm:text-2xl">About</h3>
+          <p className="text-sm sm:text-base text-primary/80">
             A 21-year-old Computer Science undergrad with experience in
             fullstack development and machine learning. Currently in my final
             year of CS degree from JEC, Assam. I primarily work with Next.js,
