@@ -4,10 +4,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const experienceData = [
   {
-    image: "#",
+    image: "/companyLogos/outplayed.jpg",
     role: "Software Engineer Intern",
     company: "Outplayed",
     location: "Remote",
+    link: "https://outplayed.in",
     duration: "Jan 2020 - Present",
     skills: ["JavaScript", "React", "Node.js", "Golang", "Apache Kafka"],
     responsibilities: [
@@ -18,9 +19,10 @@ const experienceData = [
     ],
   },
   {
-    image: "#",
+    image: "/companyLogos/cognitiveTech.png",
     role: "Frontend Developer Intern",
     company: "Cognitive Tech",
+    link: "https://www.cognitechindia.in/",
     location: "Remote",
     duration: "Jun 2018 - Dec 2019",
     skills: ["React", "Mext.js", "Tailwind CSS", "TypeScript", "Redux"],
@@ -32,9 +34,10 @@ const experienceData = [
     ],
   },
   {
-    image: "#",
+    image: "/companyLogos/iitg.png",
     role: "Machine Learning Intern",
     company: "IIT Guwahati",
+    link: "https://www.iitg.ac.in/",
     location: "Remote",
     duration: "Jan 2018 - May 2018",
     skills: ["React Native", "Mobile Development"],
@@ -49,8 +52,11 @@ const experienceData = [
 
 const educationData = [
   {
+    image: "/companyLogos/iitg.png",
     role: "Bachelor of Science in Computer Science",
     company: "University of Technology",
+    link: "https://www.iitg.ac.in/",
+    location: "Guwahati, India",
     duration: "2014 - 2018",
   },
 ];
@@ -71,6 +77,8 @@ const ExperienceSection = () => {
                 key={idx}
                 role={experience.role}
                 company={experience.company}
+                link={experience.link}
+                image={experience.image}
                 location={experience.location}
                 duration={experience.duration}
                 skills={experience.skills}
@@ -84,6 +92,9 @@ const ExperienceSection = () => {
                 key={idx}
                 role={education.role}
                 company={education.company}
+                link={education.link}
+                location={education.location}
+                image={education.image || "/companyLogos/default.png"}
                 duration={education.duration}
               />
             ))}
@@ -102,11 +113,13 @@ import { Badge } from "@/components/ui/badge";
 import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ChevronsUpDown } from "lucide-react";
+import { ArrowDownRightIcon, ChevronsUpDown } from "lucide-react";
 
 const ExperienceCard = ({
   role,
+  image,
   company,
+  link,
   responsibilities,
   location,
   duration,
@@ -114,8 +127,10 @@ const ExperienceCard = ({
 }: {
   key: number;
   role: string;
+  image: string;
   company: string;
-  location?: string;
+  link: string;
+  location: string;
   responsibilities?: string[];
   duration: string;
   skills?: string[];
@@ -131,6 +146,7 @@ const ExperienceCard = ({
       gsap.to(el, {
         height: showResponsibilities ? "auto" : "0px",
         opacity: showResponsibilities ? 1 : 0,
+        duration: 0.3,
         ease: "power1.out",
       });
     },
@@ -146,7 +162,7 @@ const ExperienceCard = ({
     >
       <div className="flex">
         <Avatar className="size-12">
-          <AvatarImage src="https://github.com/shadcn.png" />
+          <AvatarImage src={image} />
           <AvatarFallback>{company.slice(0, 1)}</AvatarFallback>
         </Avatar>
         <div className="flex justify-between w-full">
@@ -154,8 +170,14 @@ const ExperienceCard = ({
           <div className="w-full">
             <div className="flex justify-between">
               <CardHeader>
-                <CardTitle className="text-sm sm:text-lg whitespace-nowrap">
-                  <a href="#"> {company} </a>
+                <CardTitle className="text-sm sm:text-lg whitespace-nowrap flex items-center gap-2">
+                  <a href={link}> {company} </a>{" "}
+                  <ArrowDownRightIcon
+                    size={15}
+                    className={`animate-bounce transition-all duration-500 ${
+                      showResponsibilities ? "opacity-100" : "opacity-0"
+                    }`}
+                  />
                 </CardTitle>
               </CardHeader>
               {/* Duration */}
@@ -197,7 +219,7 @@ const ExperienceCard = ({
 
                 <div
                   ref={responsibilitiesRef}
-                  className="ps-6 mt-6 overflow-hidden h-0 opacity-0"
+                  className="ps-6 overflow-hidden h-0 opacity-0"
                 >
                   <h3 className="font-semibold text-s sm:text-base">
                     Responsibilities

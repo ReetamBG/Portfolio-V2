@@ -19,12 +19,12 @@ const HeroSection = () => {
               Hi, I&apos;m Reetam 👋
             </h1>
             <p className="my-2 text-base sm:text-xl font-medium">
-              Software Developer from India 🇮🇳
+              Fullstack Software Engineer
             </p>
             {/* Socials and Resume */}
             <div className="mt-6 flex gap-4 items-center transition-all">
               <a href={resume}>
-                <Button className="h-6 cursor-pointer hover:scale-105 bg-red-700 text-white">
+                <Button className="h-6 cursor-pointer bg-red-700/80 hover:bg-red-900/80 text-white">
                   Resume
                   <DownloadCloud />
                 </Button>
@@ -32,19 +32,19 @@ const HeroSection = () => {
               <a href={linkedin}>
                 <FaLinkedin
                   size={22}
-                  className="text-blue-500 hover:text-blue-500/70 hover:scale-105"
+                  className="text-blue-500 hover:text-blue-500/70"
                 />
               </a>
               <a href={github}>
                 <FaGithub
                   size={22}
-                  className="text-foreground hover:text-foreground/70 hover:scale-105"
+                  className="text-foreground hover:text-foreground/70"
                 />
               </a>
               <a href={email}>
                 <Mail
                   size={22}
-                  className="text-foreground hover:text-foreground/70 hover:scale-105"
+                  className="text-foreground hover:text-foreground/70"
                 />
               </a>
             </div>
@@ -61,11 +61,15 @@ const HeroSection = () => {
         <div className="mt-16">
           <h3 className="font-bold text-xl">About</h3>
           <p className="text-sm text-primary/80">
-            Hello i am a software developer yada yada yadad. yada yada yada
-            hello no nigg shit. yada yada yada hello no nigg shit. yada yada
-            yada hello no nigg shit. yada yada yada hello no nigg shit. yada
-            yada yada helo nigga yada no shit i work with Next.js yada yada Yeah
-            i also use express.js yada yada yada
+            I&apos;m a 21-year-old Computer Science undergrad with experience in
+            fullstack development and machine learning. I primarily work with
+            Next.js, React, Node.js, and Express to build web applications end
+            to end.
+            <br />
+            I&apos;ve built real-time systems, developed user interfaces, and
+            integrated machine learning models into production systems. I like
+            working across the stack and writing code that&apos;s easy to
+            understand and maintain.
           </p>
         </div>
       </div>
