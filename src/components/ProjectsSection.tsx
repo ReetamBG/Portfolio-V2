@@ -67,14 +67,14 @@ const ProjectCard = ({
           />
           <ArrowDownRightIcon
             size={15}
-            className="block sm:hidden animate-bounce transition-all duration-500 -left-5 relative"
+            className="block lg:hidden animate-bounce transition-all duration-500 -left-5 relative"
           />
         </h4>
         <p className="text-xs sm:text-base text-foreground/70">{description}</p>
       </div>
       {/* Preview */}
-      <div className="overflow-hidden min-w-full w-full sm:min-w-40 sm:w-40 min-h-36 h-36 sm:min-h-24 sm:h-24 rounded-md mt-4 sm:mt-0">
-        <img src={image} alt="Project Preview" className="object-cover" />
+      <div className="overflow-hidden min-w-full w-full sm:min-w-44 sm:w-44 min-h-44 h-44 sm:min-h-24 sm:h-24 rounded-md mt-4 sm:mt-0">
+        <img src={image} alt="Project Preview" className="object-cover w-full h-full" />
       </div>
     </Link>
   );
