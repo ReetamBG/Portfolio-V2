@@ -3,10 +3,22 @@
 
 @custom-variant dark (&:is(.dark *));
 
-html, body {
-  overflow: hidden;
+html,
+body {
   scroll-behavior: auto !important;
+  overscroll-behavior: none;
+  height: auto;        /* ← allow body to grow */
+  overflow: visible;   /* ← let the wrapper handle scroll */
 }
+
+#smooth-wrapper {
+  height: 100dvh; /* or 100vh */
+  overflow: auto;
+  touch-action: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+
 
 @theme inline {
   --color-background: var(--background);

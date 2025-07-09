@@ -66,7 +66,7 @@ const HeroSection = () => {
               <User />
             </span>
           </div>
-          <p className="text-sm sm:text-base text-primary/80">
+          <p className="text-sm sm:text-base text-foreground/80">
             A 21-year-old Computer Science undergrad with experience in
             fullstack development and machine learning. Currently in my final
             year of CS degree from JEC, Assam. I primarily work with Next.js,
