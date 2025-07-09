@@ -12,10 +12,9 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
 
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 0.8,
-      // easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // cubic
-      easing: (t) => t * (2 - t) // cubic easing: very natural
-      // easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) // elastic feel
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // cubic
+      // easing: (t) => t * (2 - t) // cubic easing: very natural
     });
 
     lenisRef.current = lenis;
