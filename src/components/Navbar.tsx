@@ -5,11 +5,12 @@ import { useWindowScroll } from "react-use";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import ThemeToggler from "@/components/utilityComponents/ThemeToggler";
+import Link from "next/link";
 
 const navItems = [
-  { text: "Ree", href: "#" },
-  { text: "Projects", href: "#projects" },
-  { text: "Contact", href: "#contact" },
+  { text: "Ree", href: "/" },
+  { text: "Projects", href: "/projects" },
+  { text: "Contact", href: "/contact" },
 ];
 
 const Navbar = () => {
@@ -58,14 +59,14 @@ const Navbar = () => {
       {/* Logo and product button */}
       <header
         ref={navbarRef}
-        className="py-5 bg-background/50 border-b-2 backdrop-blur-lg w-2xl mx-4 px-5 sm:px-10 rounded-b-3xl flex justify-between"
+        className="py-5 bg-background/50 border-b-2 backdrop-blur-lg w-3xl mx-4 px-5 sm:px-10 rounded-b-3xl flex justify-between"
       >
         <div className="flex justify-around items-center">
           <nav className="flex uppercase text-xs gap-5 sm:gap-15 font-general font-bold">
             {navItems.map((navItem, idx) => (
-              <a className="nav-hover-btn" key={idx} href={navItem.href}>
+              <Link className="nav-hover-btn" key={idx} href={navItem.href}>
                 {navItem.text}
-              </a>
+              </Link>
             ))}
           </nav>
         </div>

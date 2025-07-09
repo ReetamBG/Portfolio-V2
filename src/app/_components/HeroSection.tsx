@@ -51,7 +51,7 @@ const HeroSection = () => {
           </div>
           <div className="size-24 overflow-hidden rounded-full shrink-0">
             <img
-              src="/pfp.jpg"
+              src="pfp3.png"
               alt="profile picture"
               className="object-cover object-center"
             />

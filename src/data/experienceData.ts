@@ -49,10 +49,10 @@ export const experienceData = [
 export const educationData = [
   {
     image: "/companyLogos/iitg.png",
-    role: "Bachelor of Science in Computer Science",
-    company: "University of Technology",
+    role: "B.Tech in Computer Science & Engineering - GPA 8.9",
+    company: "Jorhat Engineering College",
     link: "https://www.iitg.ac.in/",
-    location: "Guwahati, India",
-    duration: "2014 - 2018",
+    location: "Jorhat, Assam, India",
+    duration: "2022 - 2026",
   },
 ];

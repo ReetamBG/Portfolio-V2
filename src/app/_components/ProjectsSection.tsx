@@ -1,22 +1,24 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { ArrowDownRightIcon, BriefcaseBusiness } from "lucide-react";
+import {
+  ArrowDownRightIcon,
+  ArrowRight,
+  BriefcaseBusiness,
+} from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import { projectsData } from "@/data/projectData";
+import SectionHeader from "@/components/SectionHeader";
 
 const ProjectsSection = () => {
   return (
     <section className="mt-32" id="projects">
-      {/* Heading */}
-      <h3 className="font-bold text-xl sm:text-3xl text-right">My Projects</h3>
-      <div className="relative">
-        <hr className="border-t-2 border-foreground/40 mt-2 mb-12 sm:mb-16" />
-        <span className="bg-foreground text-background p-2 sm:p-4 rounded-full absolute -top-5 sm:-top-7 left-5 sm:left-7">
-          <BriefcaseBusiness />
-        </span>
-      </div>
+      <SectionHeader
+        text="Projects"
+        icon={<BriefcaseBusiness />}
+        order="reversed"
+      />
 
       {/* Projects */}
       {projectsData.map((project, idx) => (
@@ -27,6 +29,14 @@ const ProjectsSection = () => {
           image={project.image}
         />
       ))}
+
+      <Link
+        href="/projects"
+        className="text-sm sm:text-base flex gap-2 justify-end mt-10 pe-12 text-foreground/80 items-center"
+      >
+        <span className="hover:underline">View More</span>
+        <ArrowRight size={20} />
+      </Link>
     </section>
   );
 };
@@ -55,7 +65,7 @@ const ProjectCard = ({
       <div
         className={`mt-2 ${
           showLinks ? "translate-x-4" : "trasnlate-x-0"
-        } transition-all duration-500 pe-5`}
+        } transition-all duration-500 pe-4 md:pe-8`}
       >
         <h4 className="font-semibold text-base sm:text-xl flex gap-2 items-center mb-2">
           {title}{" "}
@@ -74,7 +84,11 @@ const ProjectCard = ({
       </div>
       {/* Preview */}
       <div className="overflow-hidden min-w-full w-full sm:min-w-44 sm:w-44 min-h-44 h-44 sm:min-h-24 sm:h-24 rounded-md mt-4 sm:mt-0">
-        <img src={image} alt="Project Preview" className="object-cover w-full h-full" />
+        <img
+          src={image}
+          alt="Project Preview"
+          className="object-cover w-full h-full"
+        />
       </div>
     </Link>
   );
