@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Button } from "@/components/ui/button";
-import { DownloadCloud, Mail } from "lucide-react";
+import { DownloadCloud, Mail, User } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const resume = "";
@@ -60,6 +60,12 @@ const HeroSection = () => {
         {/* About section */}
         <div className="mt-16">
           <h3 className="font-bold text-xl sm:text-2xl">About</h3>
+          <div className="relative">
+            <hr className="border-t-2 border-foreground/40 mt-2 mb-8" />
+            <span className="bg-foreground text-background p-2 rounded-full absolute -top-5 right-5">
+              <User />
+            </span>
+          </div>
           <p className="text-sm sm:text-base text-primary/80">
             A 21-year-old Computer Science undergrad with experience in
             fullstack development and machine learning. Currently in my final

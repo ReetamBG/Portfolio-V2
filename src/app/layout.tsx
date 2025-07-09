@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"
+import { Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeProvider } from "@/components/utilityComponents/ThemeProvider";
 import Navbar from "@/components/Navbar";
+import SmoothScrollProvider from "@/components/utilityComponents/SmoothScrollProvider";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter", // optional: to use as CSS variable
-  display: "swap",           // recommended for better performance
-})
+  display: "swap", // recommended for better performance
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -31,7 +32,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Navbar />
-          {children}
+          <SmoothScrollProvider>
+            {children}
+          </SmoothScrollProvider>
         </ThemeProvider>
       </body>
     </html>

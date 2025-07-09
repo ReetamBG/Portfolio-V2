@@ -4,12 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { useWindowScroll } from "react-use";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import ThemeToggler from "@/components/ThemeToggler";
+import ThemeToggler from "@/components/utilityComponents/ThemeToggler";
 
 const navItems = [
   { text: "Ree", href: "#" },
-  { text: "Projects", href: "#about" },
-  { text: "Contact", href: "#features" },
+  { text: "Projects", href: "#projects" },
+  { text: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
@@ -46,7 +46,7 @@ const Navbar = () => {
     gsap.to(navContainerRef.current, {
       y: isNavbarVisible ? 0 : -100,
       opacity: isNavbarVisible ? 1 : 0,
-      duration: 0.3,
+      duration: 0.4,
     });
   }, [isNavbarVisible]);
 

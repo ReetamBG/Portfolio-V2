@@ -1,7 +1,65 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { experienceData, educationData } from "@/data/experienceData";
+
+const experienceData = [
+  {
+    image: "/companyLogos/outplayed.jpg",
+    role: "Software Engineer Intern",
+    company: "Outplayed",
+    location: "Remote",
+    link: "https://outplayed.in",
+    duration: "Jan 2020 - Present",
+    skills: ["JavaScript", "React", "Node.js", "Golang", "Apache Kafka"],
+    responsibilities: [
+      "Developing and maintaining web applications using React and Node.js.",
+      "Collaborating with cross-functional teams to design and implement new features.",
+      "Optimizing application performance and ensuring scalability.",
+      "Participating in code reviews and providing constructive feedback.",
+    ],
+  },
+  {
+    image: "/companyLogos/cognitiveTech.png",
+    role: "Frontend Developer Intern",
+    company: "Cognitive Tech",
+    link: "https://www.cognitechindia.in/",
+    location: "Remote",
+    duration: "Jun 2018 - Dec 2019",
+    skills: ["React", "Mext.js", "Tailwind CSS", "TypeScript", "Redux"],
+    responsibilities: [
+      "Developing and maintaining web applications using React and Node.js.",
+      "Collaborating with cross-functional teams to design and implement new features.",
+      "Optimizing application performance and ensuring scalability.",
+      "Participating in code reviews and providing constructive feedback.",
+    ],
+  },
+  {
+    image: "/companyLogos/iitg.png",
+    role: "Machine Learning Intern",
+    company: "IIT Guwahati",
+    link: "https://www.iitg.ac.in/",
+    location: "Remote",
+    duration: "Jan 2018 - May 2018",
+    skills: ["React Native", "Mobile Development"],
+    responsibilities: [
+      "Developing and maintaining web applications using React and Node.js.",
+      "Collaborating with cross-functional teams to design and implement new features.",
+      "Optimizing application performance and ensuring scalability.",
+      "Participating in code reviews and providing constructive feedback.",
+    ],
+  },
+];
+
+const educationData = [
+  {
+    image: "/companyLogos/iitg.png",
+    role: "Bachelor of Science in Computer Science",
+    company: "University of Technology",
+    link: "https://www.iitg.ac.in/",
+    location: "Guwahati, India",
+    duration: "2014 - 2018",
+  },
+];
 
 const ExperienceSection = () => {
   return (
@@ -13,7 +71,7 @@ const ExperienceSection = () => {
             <TabsTrigger value="education">Education</TabsTrigger>
           </TabsList>
           <TabsContent value="experience" className="relative">
-            {/* <div className="h-[94%] absolute top-4 left-12 w-[1px] bg-foreground/30 -z-10"></div> */}
+            <div className="h-[94%] absolute top-4 left-12 w-[1px] bg-foreground/30 -z-10"></div>
             {experienceData.map((experience, idx: number) => (
               <ExperienceCard
                 key={idx}
@@ -49,13 +107,13 @@ const ExperienceSection = () => {
 
 export default ExperienceSection;
 
-import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ArrowUpRightIcon, ChevronsUpDown } from "lucide-react";
+import { ArrowDownRightIcon, ChevronsUpDown } from "lucide-react";
 
 const ExperienceCard = ({
   role,
@@ -67,6 +125,7 @@ const ExperienceCard = ({
   duration,
   skills,
 }: {
+  key: number;
   role: string;
   image: string;
   company: string;
@@ -77,7 +136,6 @@ const ExperienceCard = ({
   skills?: string[];
 }) => {
   const [showResponsibilities, setShowResponsibilities] = useState(false);
-  const [showLinks, setShowLinks] = useState(false);
   const responsibilitiesRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -88,20 +146,18 @@ const ExperienceCard = ({
       gsap.to(el, {
         height: showResponsibilities ? "auto" : "0px",
         opacity: showResponsibilities ? 1 : 0,
-        duration: 0.4,
-        ease: "power2.inOut",
+        duration: 0.3,
+        ease: "power1.out",
       });
     },
     { dependencies: [showResponsibilities] }
   );
 
   return (
-    <div
-      className="rounded-sm my-4 bg-background px-0 sm:px-2 text-foreground border-b-1 py-5"
-      // onMouseEnter={() => setShowResponsibilities(true)}
-      // onMouseLeave={() => setShowResponsibilities(false)}
-      onMouseEnter={() => {setShowLinks(true)}}
-      onMouseLeave={() => {setShowLinks(false)}}
+    <Card
+      className="rounded-sm my-4 bg-background px-5 text-foreground"
+      onMouseEnter={() => setShowResponsibilities(true)}
+      onMouseLeave={() => setShowResponsibilities(false)}
       onClick={() => setShowResponsibilities(!showResponsibilities)}
     >
       <div className="flex">
@@ -113,12 +169,13 @@ const ExperienceCard = ({
           {/* Company, Role and description */}
           <div className="w-full">
             <div className="flex justify-between">
-              <CardHeader className={`transition-all duration-500 ${showResponsibilities || showLinks ? "translate-x-4" : "trasnlate-x-0"}`}>
-                <CardTitle className="text-sm sm:text-xl whitespace-nowrap flex items-center gap-2">
-                  <a href={link}>{company}</a>
-                  <ArrowUpRightIcon
-                    className={`animate-bounce transition-all duration-500 size-3 sm:size-5 ${
-                      showResponsibilities || showLinks ? "opacity-100" : "opacity-0"
+              <CardHeader>
+                <CardTitle className="text-sm sm:text-lg whitespace-nowrap flex items-center gap-2">
+                  <a href={link}> {company} </a>{" "}
+                  <ArrowDownRightIcon
+                    size={15}
+                    className={`animate-bounce transition-all duration-500 ${
+                      showResponsibilities ? "opacity-100" : "opacity-0"
                     }`}
                   />
                 </CardTitle>
@@ -128,12 +185,12 @@ const ExperienceCard = ({
                 {duration}
               </p>
             </div>
-            <CardContent className={`transition-all duration-500 ${showResponsibilities || showLinks ? "translate-x-4" : "trasnlate-x-0"}`}>
-              <p className="text-xs sm:text-base">{role}</p>
+            <CardContent>
+              <p className="text-xs sm:text-sm">{role}</p>
               <p className="text-foreground/70 text-xs">{location}</p>
             </CardContent>
             {/* Skills */}
-            {/* <div className="mt-2 ps-4">
+            <div className="mt-2 ps-4">
               {skills &&
                 skills.map((skill, idx) => (
                   <Badge
@@ -144,7 +201,7 @@ const ExperienceCard = ({
                     {skill}
                   </Badge>
                 ))}
-            </div> */}
+            </div>
 
             {/* Responsibilities */}
             {responsibilities && (
@@ -164,27 +221,13 @@ const ExperienceCard = ({
                   ref={responsibilitiesRef}
                   className="ps-6 overflow-hidden h-0 opacity-0"
                 >
-                  {/* Skills (Reloacated here) */}
-                  <div className="mb-8">
-                    {skills &&
-                      skills.map((skill, idx) => (
-                        <Badge
-                          key={idx}
-                          variant="secondary"
-                          className="me-1 my-0.5"
-                        >
-                          {skill}
-                        </Badge>
-                      ))}
-                  </div>
-
-                  <h3 className="font-semibold text-sm sm:text-base">
+                  <h3 className="font-semibold text-s sm:text-base">
                     Responsibilities
                   </h3>
                   {responsibilities.map((r, idx) => (
                     <p
                       key={idx}
-                      className="text-xs sm:text-base text-foreground/70 mt-2"
+                      className="text-xs sm:text-sm text-foreground/70 mt-2"
                     >
                       • {r}
                     </p>
@@ -195,6 +238,6 @@ const ExperienceCard = ({
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
