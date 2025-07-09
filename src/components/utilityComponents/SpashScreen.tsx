@@ -24,10 +24,10 @@ export default function SplashScreen() {
     const tl = gsap.timeline();
 
     // Initial fade-in (performer enters)
-    tl.to(
-      textRef.current,
-      { opacity: 1, duration: 0.6, ease: "power1.in" }
-    );
+    tl.to(textRef.current, { opacity: 1, duration: 0.6, ease: "power1.in" });
+
+    // pause a bit let the first word settle
+    tl.to({}, {}, ">0.1");
 
     // Cycle greetings
     greetings.forEach((greeting) => {
@@ -56,8 +56,8 @@ export default function SplashScreen() {
   }, []);
 
   // Cleanup after the animation is done
-  if(!showSplash) {
-    return null; 
+  if (!showSplash) {
+    return null;
   }
 
   return (
