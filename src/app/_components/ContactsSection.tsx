@@ -64,7 +64,7 @@ const ContactsSection = () => {
       {/* Social Icons */}
       <div className="mt-8 flex justify-center gap-6 sm:gap-8">
         {socialLinks.map(({ href, label, icon }) => (
-          <Link
+          <a
             key={label}
             href={href}
             target="_blank"
@@ -72,7 +72,7 @@ const ContactsSection = () => {
             className="hover:scale-110 transition-transform text-foreground"
           >
             <Icon icon={icon} className="size-8" />
-          </Link>
+          </a>
         ))}
       </div>
     </section>

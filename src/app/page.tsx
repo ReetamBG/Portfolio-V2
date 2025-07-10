@@ -14,8 +14,8 @@ export default function Home() {
           <div className="mt-32 mb-24 mx-5 sm:mx-10 max-w-3xl">
             <HeroSection />
             <ExperienceSection />
-            <SkillsSection />
             <ProjectsSection />
+            <SkillsSection />
             <ContactsSection />
           </div>
         </main>

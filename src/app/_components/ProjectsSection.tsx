@@ -24,6 +24,7 @@ const ProjectsSection = () => {
       {projectsData.slice(0, 4).map((project, idx) => (
         <ProjectCard
           key={idx}
+          id={idx}
           title={project.title}
           description={project.description}
           image={project.image}
@@ -44,10 +45,12 @@ const ProjectsSection = () => {
 export default ProjectsSection;
 
 const ProjectCard = ({
+  id,
   title,
   description,
   image,
 }: {
+  id: number
   title: string;
   description: string;
   image: string;
@@ -56,8 +59,8 @@ const ProjectCard = ({
 
   return (
     <Link
-      href="/"
-      className="border-b-1 flex flex-col sm:flex-row justify-between px-2 sm:px-5 py-4 cursor-pointer"
+      href={`/projects/${id}`}
+      className="border-b-1 flex flex-col sm:flex-row justify-between px-2 sm:px-5 py-8 cursor-pointer"
       onMouseEnter={() => setShowLinks(true)}
       onMouseLeave={() => setShowLinks(false)}
     >

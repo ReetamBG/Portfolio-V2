@@ -115,7 +115,7 @@ const ExperienceCard = ({
             <div className="flex justify-between">
               <CardHeader className={`transition-all duration-500 ${showResponsibilities || showLinks ? "translate-x-4" : "trasnlate-x-0"}`}>
                 <CardTitle className="text-sm sm:text-xl whitespace-nowrap flex items-center gap-2">
-                  <a href={link}>{company}</a>
+                  <a target="_blank" href={link}>{company}</a>
                   <ArrowUpRightIcon
                     className={`animate-bounce transition-all duration-500 size-3 sm:size-5 ${
                       showResponsibilities || showLinks ? "opacity-100" : "opacity-0"

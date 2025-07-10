@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { DownloadCloud, Mail, User } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
-const resume = "";
+const resume = "https://drive.google.com/file/d/1SSj2cfoshR9f1Q6H4CZzO-XMzm2d22oO/view?usp=drive_link";
 const email = "r33t4m@gmail.com";
 const linkedin = "https://www.linkedin.com/in/reetam-borgohain";
 const github = "https://github.com/ReetamBG";
@@ -23,25 +23,25 @@ const HeroSection = () => {
             </p>
             {/* Socials and Resume */}
             <div className="mt-6 flex gap-4 items-center transition-all">
-              <a href={resume}>
+              <a target="_blank" href={resume}>
                 <Button className="h-6 cursor-pointer bg-red-700/80 hover:bg-red-900/80 text-white">
                   Resume
                   <DownloadCloud />
                 </Button>
               </a>
-              <a href={linkedin}>
+              <a target="_blank" href={linkedin}>
                 <FaLinkedin
                   size={22}
                   className="text-blue-500 hover:text-blue-500/70"
                 />
               </a>
-              <a href={github}>
+              <a target="_blank" href={github}>
                 <FaGithub
                   size={22}
                   className="text-foreground hover:text-foreground/70"
                 />
               </a>
-              <a href={email}>
+              <a target="_blank" href={email}>
                 <Mail
                   size={22}
                   className="text-foreground hover:text-foreground/70"
