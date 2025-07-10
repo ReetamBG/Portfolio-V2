@@ -27,7 +27,7 @@ export default function SplashScreen() {
     tl.to(textRef.current, { opacity: 1, duration: 0.6, ease: "power1.in" });
 
     // pause a bit let the first word settle
-    tl.to({}, {}, ">0.1");
+    // tl.to({}, {}, ">0.1");
 
     // Cycle greetings
     greetings.forEach((greeting) => {
