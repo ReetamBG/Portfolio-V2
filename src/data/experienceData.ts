@@ -59,6 +59,6 @@ export const educationData = [
     company: "Pragya Academy",
     link: "https://jecassam.ac.in/",
     location: "Jorhat, Assam, India",
-    duration: "2022 - 2026",
+    duration: "2020 - 2022",
   },
 ];
