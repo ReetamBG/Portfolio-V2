@@ -34,7 +34,7 @@ export const experienceData = [
     company: "IIT Guwahati",
     link: "https://www.iitg.ac.in/",
     location: "Remote",
-    duration: "Jan 2018 - May 2018",
+    duration: "June 2024 - August 2024",
     skills: ["Python", "Deep Learning", "Pytorch"],
     responsibilities: [
       "Optimized the Bonsai ML model for IoT devices with strict 2KB RAM constraints.",
