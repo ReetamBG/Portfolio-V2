@@ -59,7 +59,7 @@ const HeroSection = () => {
         </div>
         {/* About section */}
         <div className="mt-16">
-          <h3 className="font-bold text-xl sm:text-2xl">About</h3>
+          <h3 className="font-bold text-xl sm:text-2xl">About Me</h3>
           <div className="relative">
             <hr className="border-t-2 border-foreground/40 mt-2 mb-8" />
             <span className="bg-foreground text-background p-2 rounded-full absolute -top-5 right-5">

@@ -15,13 +15,13 @@ const ProjectsSection = () => {
   return (
     <section className="mt-32" id="projects">
       <SectionHeader
-        text="Projects"
+        text="My Projects"
         icon={<BriefcaseBusiness />}
         order="reversed"
       />
 
       {/* Projects */}
-      {projectsData.map((project, idx) => (
+      {projectsData.slice(0, 4).map((project, idx) => (
         <ProjectCard
           key={idx}
           title={project.title}
@@ -32,7 +32,7 @@ const ProjectsSection = () => {
 
       <Link
         href="/projects"
-        className="text-sm sm:text-base flex gap-2 justify-end mt-10 pe-12 text-foreground/80 items-center"
+        className="text-sm sm:text-base flex gap-2 justify-end mt-6 sm:mt-10 pe-6 sm:pe-12 text-foreground/80 items-center"
       >
         <span className="hover:underline">View More</span>
         <ArrowRight size={20} />
@@ -77,7 +77,7 @@ const ProjectCard = ({
           />
           <ArrowDownRightIcon
             size={15}
-            className="block lg:hidden animate-bounce transition-all duration-500 -left-5 relative"
+            className="block lg:hidden animate-bounce transition-all duration-500 -left-6 relative"
           />
         </h4>
         <p className="text-xs sm:text-base text-foreground/70">{description}</p>
